@@ -9,7 +9,7 @@
   <script src="../node_modules/blockly/python_compressed.js"></script>
   <script src="../node_modules/blockly/blocks_compressed.js"></script>
   <!-- 내 블록 만들기-->
-  <script src="beagle_moter_blocks.js"></script>
+  <script src="beagle_motor_blocks.js"></script>
   <script src="beagle_utill_blocks.js"></script>
 
   <!--ros2 실행 스크립트-->
@@ -329,7 +329,7 @@
     </category>
     <category name="variables" colour="%{BKY_VARIABLES_HUE}"  custom="VARIABLE"></category>
     <category name="beagle move" colour= 285 >
-      <block type="moter_control">
+      <block type="motor_control">
         <value name="left_speed">
           <shadow type="math_number">
             <field name="NUM">10</field>
@@ -341,7 +341,7 @@
           </shadow>
         </value>
       </block>
-      <block type="moter_control_second">
+      <block type="motor_control_second">
         <value name="left_speed">
           <shadow type="math_number">
             <field name="NUM">10</field>
@@ -394,6 +394,11 @@
           </shadow>
         </value>
       </block>
+      <block type="motor_cancel"></block>
+      <block type="left_encoder"></block>
+      <block type="right_encoder"></block>
+    </category>
+    <category name="beagle utill" colour= 300 >
       <block type="servo_control">
         <value name="angle">
           <shadow type="math_number">
@@ -413,8 +418,6 @@
           </shadow>
         </value>
       </block>
-    </category>
-    <category name="beagle utill" colour= 300 >
       <block type="buzzer_control">
         <value name="hz">
           <shadow type="math_number">
