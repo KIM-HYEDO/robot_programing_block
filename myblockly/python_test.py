@@ -23,10 +23,10 @@ if __name__ == "__main__":
     middle_py = f.readlines()
     f.close()
     print(middle_py)
-
     f = open(ros_dir, 'r')
     read_lines = f.readlines()
     f.close()
+    middle_code=''
     while True:
         line=read_lines[0]
         resulte_py += line
@@ -34,7 +34,8 @@ if __name__ == "__main__":
         if line == '        # code_start\n':
             break
     for line in middle_py:
-        resulte_py += '        '+line
+        middle_code += '        '+line
+    resulte_py+=middle_code
     while True:
         line=read_lines[0]
         read_lines.pop(0)
@@ -49,4 +50,15 @@ if __name__ == "__main__":
     f = open(ros_dir[:-8]+'.py', 'w')
     f.write(resulte_py)
     f.close()
-    os.system('ros2 run block_coding_node coding_node')
+
+
+    # lidar 사용시에만 lidar 실행
+    lidar_use='self.lidar' in middle_code
+    launch_ros2='ros2 launch block_coding_node block_coding.launch.py'+' lidar_use:='+str(lidar_use)
+    if lidar_use:
+        lidar_mode=input('input lidar mode (raw,zero,trunc)\n')
+        launch_ros2+=' lidar_mode:='+lidar_mode
+
+    print(launch_ros2)
+
+    os.system(launch_ros2)

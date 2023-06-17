@@ -2,6 +2,31 @@
 Blockly.defineBlocksWithJsonArray(
   [
     {
+      "type": "motor_control_no_callback",
+      "message0": "motor control %1 left speed: %2 right speed: %3",
+      "args0": [
+        {
+          "type": "input_dummy"
+        },
+        {
+          "type": "input_value",
+          "name": "left_speed",
+          "check": "Number",
+        },
+        {
+          "type": "input_value",
+          "name": "right_speed",
+          "check": "Number"
+        }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 285,
+      "tooltip": "",
+      "helpUrl": ""
+    },
+    {
       "type": "motor_control",
       "message0": "motor control %1 left speed: %2 right speed: %3%4",
       "args0": [
@@ -182,6 +207,19 @@ Blockly.defineBlocksWithJsonArray(
       "helpUrl": ""
     }
 ]);
+Blockly.Python['motor_control_no_callback']=function(block)
+{
+  var value_left_speed = Blockly.Python.valueToCode(block, 'left_speed', Blockly.Python.ORDER_ATOMIC);
+  var value_right_length = Blockly.Python.valueToCode(block, 'right_speed', Blockly.Python.ORDER_ATOMIC);
+
+  var code = 'if self.send_goal_motor_control(-1, ('+value_left_speed+','+value_right_length+')):\n';
+  code += '  while self.end_time is None:\n';
+  code += '    rclpy.spin_once(self)\n';
+  code += '  self.end_time = None\n';
+  code += 'else:\n';
+  code += '  return False\n';
+  return code;
+}
 Blockly.Python['motor_control']=function(block)
 {
   var value_left_speed = Blockly.Python.valueToCode(block, 'left_speed', Blockly.Python.ORDER_ATOMIC);
@@ -199,6 +237,8 @@ Blockly.Python['motor_control']=function(block)
     }
   }
   code += 'self.end_time = None\n';
+  code += 'else:\n';
+  code += '  return False\n';
   return code;
 }
 Blockly.Python['motor_control_second']=function(block)
@@ -219,6 +259,8 @@ Blockly.Python['motor_control_second']=function(block)
     }
   }
   code += 'self.end_time = None\n';
+  code += 'else:\n';
+  code += '  return False\n';
   return code;
 }
 Blockly.Python['straight_go_length']=function(block)
@@ -238,6 +280,8 @@ Blockly.Python['straight_go_length']=function(block)
     }
   }
   code += 'self.end_time = None\n';
+  code += 'else:\n';
+  code += '  return False\n';
   return code;
 }
 Blockly.Python['straight_go_second']=function(block)
@@ -257,6 +301,8 @@ Blockly.Python['straight_go_second']=function(block)
     }
   }
   code += 'self.end_time = None\n';
+  code += 'else:\n';
+  code += '  return False\n';
   return code;
 }
 Blockly.Python['turn_angle']=function(block)
@@ -277,6 +323,8 @@ Blockly.Python['turn_angle']=function(block)
     }
   }
   code += 'self.end_time = None\n';
+  code += 'else:\n';
+  code += '  return False\n';
   return code;
 }
 Blockly.Python['motor_cancel']=function(block)
