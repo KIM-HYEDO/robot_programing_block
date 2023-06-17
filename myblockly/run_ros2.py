@@ -22,7 +22,7 @@ if __name__ == "__main__":
     f = open(middle_dir, 'r')
     middle_py = f.readlines()
     f.close()
-    print(middle_py)
+    # print(middle_py)
     f = open(ros_dir, 'r')
     read_lines = f.readlines()
     f.close()
@@ -46,7 +46,7 @@ if __name__ == "__main__":
         line=read_lines[0]
         read_lines.pop(0)
         resulte_py += line
-    print(resulte_py)
+    # print(resulte_py)
     f = open(ros_dir[:-8]+'.py', 'w')
     f.write(resulte_py)
     f.close()
