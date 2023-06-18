@@ -53,9 +53,13 @@ if __name__ == "__main__":
 
     # lidar 사용시에만 lidar 실행
     lidar_use = 'self.lidar' in middle_code
-    camera_use = 'self.camera' in middle_code
+    camera_use = 'self.camera' in middle_code or '#camera_view' in middle_code
+    yolo_use = 'self.camera' in middle_code
+    camera_view = '#camera_view' in middle_code
     launch_ros2 = 'ros2 launch block_coding_node block_coding.launch.py'
     launch_ros2 += ' camera_use:='+str(camera_use)
+    launch_ros2 += ' yolo_use:='+str(yolo_use)
+    launch_ros2 += ' camera_view:='+str(camera_view)
     if lidar_use:
         lidar_mode = input('input lidar mode (raw,zero,trunc)\n')
         launch_ros2 += ' lidar_use:='+str(lidar_use)+' lidar_mode:='+lidar_mode
