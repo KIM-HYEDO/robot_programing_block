@@ -16,7 +16,7 @@ if __name__ == "__main__":
     # middle_dir = '/home/minseoklee/Downloads/middle_code (1).py'
     print(ros_dir)
     print(middle_dir)
-    ros_dir += "/src/robot_programing/block_coding_node/block_coding_node/main_copy.py"
+    ros_dir += "/src/robot_programing_ros/block_coding_node/block_coding_node/main_copy.py"
     result_py = ""
     middle_py = None
     f = open(middle_dir, 'r')
