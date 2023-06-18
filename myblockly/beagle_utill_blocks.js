@@ -323,6 +323,16 @@ Blockly.defineBlocksWithJsonArray(
       "helpUrl": ""
     },
     {
+      "type": "camera_view",
+      "message0": "camera view",
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 285,
+      "tooltip": "",
+      "helpUrl": ""
+    },
+    {
       "type": "recive_topic",
       "message0": "update data",
       "inputsInline": true,
@@ -385,6 +395,9 @@ Blockly.Python['camera_locate'] = function (block) {
   var code = 'self.camera[' + dropdown_type + '][' + value_num + '][' + dropdown_pos + ']';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['camera_view'] = function (block) {
+  return '#camera_view\n';
 };
 Blockly.Python['recive_topic'] = function (block) {
   return 'rclpy.spin_once(self,timeout_sec=0.1)\n';
