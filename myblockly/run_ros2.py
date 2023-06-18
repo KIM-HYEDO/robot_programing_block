@@ -17,7 +17,7 @@ if __name__ == "__main__":
     print(ros_dir)
     print(middle_dir)
     ros_dir += "/src/robot_programing/block_coding_node/block_coding_node/main_copy.py"
-    resulte_py = ""
+    result_py = ""
     middle_py = None
     f = open(middle_dir, 'r')
     middle_py = f.readlines()
@@ -26,38 +26,39 @@ if __name__ == "__main__":
     f = open(ros_dir, 'r')
     read_lines = f.readlines()
     f.close()
-    middle_code=''
+    middle_code = ''
     while True:
-        line=read_lines[0]
-        resulte_py += line
+        line = read_lines[0]
+        result_py += line
         read_lines.pop(0)
         if line == '        # code_start\n':
             break
     for line in middle_py:
         middle_code += '        '+line
-    resulte_py+=middle_code
+    result_py += middle_code
     while True:
-        line=read_lines[0]
+        line = read_lines[0]
         read_lines.pop(0)
         if line == '        # code_end\n':
-            resulte_py += line
+            result_py += line
             break
     while len(read_lines):
-        line=read_lines[0]
+        line = read_lines[0]
         read_lines.pop(0)
-        resulte_py += line
-    # print(resulte_py)
+        result_py += line
+    # print(result_py)
     f = open(ros_dir[:-8]+'.py', 'w')
-    f.write(resulte_py)
+    f.write(result_py)
     f.close()
 
-
     # lidar 사용시에만 lidar 실행
-    lidar_use='self.lidar' in middle_code
-    launch_ros2='ros2 launch block_coding_node block_coding.launch.py'+' lidar_use:='+str(lidar_use)
+    lidar_use = 'self.lidar' in middle_code
+    camera_use = 'self.camera' in middle_code
+    launch_ros2 = 'ros2 launch block_coding_node block_coding.launch.py'
+    launch_ros2 += ' camera_use:='+str(camera_use)
     if lidar_use:
-        lidar_mode=input('input lidar mode (raw,zero,trunc)\n')
-        launch_ros2+=' lidar_mode:='+lidar_mode
+        lidar_mode = input('input lidar mode (raw,zero,trunc)\n')
+        launch_ros2 += ' lidar_use:='+str(lidar_use)+' lidar_mode:='+lidar_mode
 
     print(launch_ros2)
 
